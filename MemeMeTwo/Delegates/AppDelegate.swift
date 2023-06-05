@@ -1,9 +1,10 @@
-//
-//  AppDelegate.swift
-//  MemeMeTwo
-//
-//  Created by Apple Computer on 6/4/23.
-//
+/*
+ *  AppDelegate.swift
+ *  MemeMeTwo
+ *
+ *  Created by Paul Lewallen on 6/4/23.
+ *
+ */
 
 import UIKit
 
