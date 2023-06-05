@@ -8,4 +8,6 @@
 
 import UIKit
 
-class MemeEditorViewController {}
+class MemeEditorViewController {
+    //TODO: Add stuff
+}

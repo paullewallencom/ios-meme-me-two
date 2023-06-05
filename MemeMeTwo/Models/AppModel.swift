@@ -8,4 +8,6 @@
 
 import UIKit
 
-class AppModel {}
+class AppModel {
+    //TODO: Add stuff
+}

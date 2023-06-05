@@ -8,4 +8,6 @@
 
 import UIKit
 
-class SentMemeTableViewController {}
+class SentMemeTableViewController {
+    //TODO: Add stuff
+}

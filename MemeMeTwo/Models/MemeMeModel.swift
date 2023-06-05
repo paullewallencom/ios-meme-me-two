@@ -8,4 +8,6 @@
 
 import UIKit
 
-class MemeMeModel {}
+class MemeMeModel {
+    //TODO: Add stuff
+}

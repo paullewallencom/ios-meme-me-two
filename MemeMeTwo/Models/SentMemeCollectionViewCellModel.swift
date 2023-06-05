@@ -8,4 +8,6 @@
 
 import UIKit
 
-class SentMemeCollectionViewCellModel {}
+class SentMemeCollectionViewCellModel {
+    //TODO: Add stuff
+}
