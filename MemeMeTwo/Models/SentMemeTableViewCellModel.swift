@@ -10,5 +10,9 @@ import UIKit
 
 class SentMemeTableViewCellModel {
     
+    // MARK: Properties
+    
+    // MARK: Custom Cell Functions
+    
     // TODO: Add stuff
 }
