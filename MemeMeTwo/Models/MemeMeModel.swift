@@ -8,6 +8,10 @@
 
 import UIKit
 
-class MemeMeModel {
+struct MemeMeModel {
+    var topText     : NSString!
+    var bottomText  : NSString!
+    var image       : UIImage!
+    var memeImage   : UIImage!
     //TODO: Add stuff
 }
