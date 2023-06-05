@@ -10,5 +10,9 @@ import UIKit
 
 class SentMemeCollectionViewCellModel {
     
+    // MARK: Outlets
+    
+    // MARK: Custom Cell Functions
+    
     // TODO: Add stuff
 }
