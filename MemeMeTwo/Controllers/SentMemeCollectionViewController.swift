@@ -9,5 +9,11 @@
 import UIKit
 
 class SentMemeCollectionViewController {
+    
+    // MARK: Properties and Outlets
+    
+    // MARK: UICollectionView Data Source
+    
+    // MARK: UICollectionView Delegates
     // TODO: Add stuff
 }
