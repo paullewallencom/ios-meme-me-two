@@ -9,5 +9,6 @@
 import UIKit
 
 class SentMemeTableViewCellModel {
-    //TODO: Add stuff
+    
+    // TODO: Add stuff
 }

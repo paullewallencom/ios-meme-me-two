@@ -24,5 +24,6 @@ struct AppModel {
     }
     
     static let memeTextAttributes : [NSAAttributedString.Key : Any] = []
-    //TODO: Add stuff
+    
+    // TODO: Add stuff
 }

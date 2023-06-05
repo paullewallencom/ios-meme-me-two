@@ -64,7 +64,7 @@ class MemeMeViewController: UIViewController {
     
     @IBAction func setFont () {}
     
-    //MARK: Helper Functions
+    // MARK: Helper Functions
     var statusBarHidden: Bool () {}
     
     override func viewWillLayoutSubviews () {}

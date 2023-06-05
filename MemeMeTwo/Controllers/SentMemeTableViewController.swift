@@ -9,5 +9,5 @@
 import UIKit
 
 class SentMemeTableViewController {
-    //TODO: Add stuff
+    // TODO: Add stuff
 }

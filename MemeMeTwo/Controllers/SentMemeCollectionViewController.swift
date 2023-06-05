@@ -9,5 +9,5 @@
 import UIKit
 
 class SentMemeCollectionViewController {
-    //TODO: Add stuff
+    // TODO: Add stuff
 }

@@ -13,5 +13,6 @@ struct MemeMeModel {
     var bottomText  : NSString!
     var image       : UIImage!
     var memeImage   : UIImage!
-    //TODO: Add stuff
+    
+    // TODO: Add stuff
 }
