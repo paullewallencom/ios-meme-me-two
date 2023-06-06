@@ -77,6 +77,30 @@ class MemeMeViewController: UIViewController {
     
 }
 
-extension MemeMeViewController {}
+extension MemeMeViewController : UITextFieldDelegate {
+    
+    // MARK: UITextField Extension
+    func textField () {}
+    
+    func setTextFields () {}
+    
+    func textFieldDidBeginEditing () {}
+    
+    func textFieldDidEndEnding () {}
+    
+    func textFieldShouldReturn () {}
+}
 
-extension MemeMeViewController {}
+extension MemeMeViewController : UIScrollViewDelegate {
+    
+    // MARK: Center Image
+    func centerImage () {}
+    
+    // MARK: Zoom Scale
+    func setZoomScaleForImage () {}
+    
+    // MARK: UIScrollView Extension
+    func viewForZooming () {}
+    
+    func scrollViewDidZoom () {}
+}
