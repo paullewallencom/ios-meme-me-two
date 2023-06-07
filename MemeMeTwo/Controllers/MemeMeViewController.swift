@@ -155,51 +155,137 @@ class MemeMeViewController: UIViewController {
                 self.resetTextfieldText ()
                 self.shareButton.isEnabled = false
             }
+            let no = UIAlertAction (title : "No", style : .default, handler : nil)
+            alert.addAction (yes)
+            alert.addAction (no)
+            self.present (alert, animated : true, completion : nil)
         }
     }
     
     // MARK: Animation
-    override func viewWillTransition () {}
+    override func viewWillTransition (to size : CGSize, with coordinator : UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition (to : size, with : coordinator)
+        coordinator.animate (alongsideTransition : { (UIViewControllerTransitionCoordinatorContext) in
+            self.topTextField.transform = CGAffineTransform (scaleX : 1.1, y : 1.1)
+            self.bottomTextField.transform = CGAffineTransform (scaleX : 1.1, y : 1.1)
+        }) { (UIViewControllerTransitionCoordintatorContext) in
+            UIView.animate (withDuration : 0.5, animations: {
+                self.topTextField.transform = CGAffineTransform.identity
+                self.bottomTextField.transform = CGAffineTransform.identity
+            })
+        }
+    }
     
-    @IBAction func setFont () {}
+    @IBAction func setFont (_ sender : AnyObject) {
+        self.performSegue (withIdentifier : AppModel.fontTableViewSegueIdentifier, sender : nil)
+    }
     
     // MARK: Helper Functions
-    var statusBarHidden: Bool () {}
+    var statusBarHidden: Bool {
+        return true
+    }
     
-    override func viewWillLayoutSubviews () {}
+    override func viewWillLayoutSubviews () {
+        self.view.layoutIfNeeded ()
+        setZoomScaleForImage (scrollViewSize : scrollView.bounds.size)
+        
+        if scrollView.zoomScale < scrollView.minimumZoomScale || scrollView.zoomScale == 1 {
+            scrollView.zoomScale = scrollView.minimumZoomScale
+        }
+        centerImage ()
+    }
     
-    func configureBars () {}
+    func configureBars (hidden : Bool) {
+        navBar.isHidden = hidden
+        toolBar.isHidden = hidden
+    }
     
-    func resetTextfieldText () {}
+    func resetTextfieldText () {
+        topTextField.text = AppModel.defaultTopTextFieldText
+        bottomTextField.text = AppModel.defaultBottomTextFieldText
+    }
     
-    func presentImagePicker () {}
+    func presentImagePicker (sourceType : UIImagePickerController.SourceType) {
+        let imagePicker = UIImagePickerController ()
+        imagePicker.delegate = self
+        imagePicker.sourceType = sourceType
+        self.present (imagePicker, animated : true, completion : nil)
+    }
     
 }
 
 extension MemeMeViewController : UITextFieldDelegate {
     
     // MARK: UITextField Extension
-    func textField () {}
+    func textField (_ textField : UITextField, shouldChangeCharactersIn range : NSRange, replacementString string : String) -> Bool {
+        var text = textField.text as NSString?
+        text = text!.replacingCharacters (in : range, with : string) as NSString?
+        
+        textField.text = text?.uppercased
+        return false
+    }
     
-    func setTextFields () {}
+    func setTextFields (textField : UITextField, string : String) {
+        textField.defaultTextAttributes = AppModel.memeTextAttributes
+        textField.text = string
+        textField.textAlignment = NSTextAlignment.center
+        textField.delegate = self;
+    }
     
-    func textFieldDidBeginEditing () {}
+    func textFieldDidBeginEditing (_ textField : UITextField) {
+        if textField == topTextField && textField.text == AppModel.defaultTopTextFieldText {
+            textField.text = ""
+        } else if textField == bottomTextField && textField.text == AppModel.defaultBottomTextFieldText {
+            textField.text = ""
+        }
+    }
     
-    func textFieldDidEndEnding () {}
+    func textFieldDidEndEnding (_ textField : UITextField) {
+        if textField == topTextField && textField.text!.isEmpty {
+            textField.text = AppModel.defaultTopTextFieldText;
+        } else if textField == bottomTextField && textField.text!.isEmpty {
+            textField.text = AppModel.defaultBottomTextFieldText;
+        }
+    }
     
-    func textFieldShouldReturn () {}
+    func textFieldShouldReturn (_ textField : UITextField) -> Bool {
+        textField.resignFirstResponder ()
+        return true
+    }
 }
 
 extension MemeMeViewController : UIScrollViewDelegate {
     
     // MARK: Center Image
-    func centerImage () {}
+    func centerImage () {
+        if imagePickerView.image != nil {
+            let scrollViewSize = scrollView.bounds.size
+            let imageSize = imagePickerView.frame.size
+            let horizontalSpace = imageSize.width < scrollViewSize.width ? (scrollViewSize.width - imageSize.width) / 2 : 0
+            let verticalSpace = imageSize.height < scrollViewSize.height ? (scrollViewSize.height - imageSize.height) / 2 : 0
+            scrollView.contentInset = UIEdgeInsets (top : verticalSpace, left : horizontalSpace, bottom : verticalSpace, right : horizontalSpace)
+        }
+    }
     
     // MARK: Zoom Scale
-    func setZoomScaleForImage () {}
+    func setZoomScaleForImage (scrollViewSize : CGSize) {
+        if let image = imagePickerView.image {
+            let imageSize = image.size
+            let widthScale = scrollViewSize.width / imageSize.width
+            let heightScale = scrollViewSize.height / imageSize.height
+            
+            let minScale = min (widthScale, heightScale)
+            scrollView.minimumZoomScale = minScale
+            scrollView.maximumZoomScale = 3.0
+        }
+    }
     
     // MARK: UIScrollView Extension
-    func viewForZooming () {}
+    func viewForZooming (in scrollView : UIScrollView) ->UIView? {
+        return imagePickerView
+    }
     
-    func scrollViewDidZoom () {}
+    func scrollViewDidZoom (_ scrollView : UIScrollView) {
+        centerImage ()
+    }
 }
